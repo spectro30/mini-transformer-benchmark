@@ -1,0 +1,42 @@
+[
+  {
+    "model": "A",
+    "pos_enc": "Yes",
+    "heads": 1,
+    "layers": 1,
+    "val_acc": 0.856,
+    "test_acc": 0.849,
+    "train_time": "0.1 min",
+    "params": 33922
+  },
+  {
+    "model": "B",
+    "pos_enc": "Yes",
+    "heads": 4,
+    "layers": 1,
+    "val_acc": 0.968,
+    "test_acc": 0.963,
+    "train_time": "0.1 min",
+    "params": 33922
+  },
+  {
+    "model": "C",
+    "pos_enc": "No",
+    "heads": 4,
+    "layers": 1,
+    "val_acc": 0.814,
+    "test_acc": 0.823,
+    "train_time": "0.1 min",
+    "params": 33922
+  },
+  {
+    "model": "D",
+    "pos_enc": "Yes",
+    "heads": 4,
+    "layers": 2,
+    "val_acc": 0.995,
+    "test_acc": 0.994,
+    "train_time": "0.1 min",
+    "params": 67394
+  }
+]

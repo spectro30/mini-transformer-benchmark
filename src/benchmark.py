@@ -1,11 +1,16 @@
 import torch
 import time
+import json
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(__file__))
 
 from data import get_dataloaders
 from model import MiniTransformer
 from train import train, evaluate
-
 from utils import set_seed, plot_training_curves
+
 set_seed(1971)
 
 device = "mps" if torch.backends.mps.is_available() else "cpu"
@@ -70,14 +75,13 @@ print("-" * 70)
 for r in results:
     print(f"{r['model']:<8}{r['pos_enc']:<10}{r['heads']:<8}{r['layers']:<8}{r['val_acc']:<10}{r['test_acc']:<10}{r['train_time']:<10}{r['params']}")
 
+# plot first, then save json (removing history after)
+plot_training_curves(results, save_path="training_curves.png")
 
-# save results for plotting in report
-import json
+for r in results:
+    r.pop("history")
+
 with open("benchmark_results.json", "w") as f:
-    for r in results:
-        r.pop("history")   # remove history before saving (not JSON serializable as-is)
     json.dump(results, f, indent=2)
 
-print("\nsaved to benchmark_results.json")
-
-plot_training_curves(results, save_path="training_curves.png")
+print("saved to benchmark_results.json")
